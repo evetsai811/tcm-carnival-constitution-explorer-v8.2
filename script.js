@@ -1,8 +1,35 @@
+let hasSubmittedToSheet = false;
+async function sendToGoogleSheet(primary, multi) {
+if (hasSubmittedToSheet) return;
+hasSubmittedToSheet = true;
+try {
+```
+await fetch(
+  'https://script.google.com/macros/s/AKfycbyMw08r-l3LTvOgRgDRQiCzz5dQDxeSZDfc5wMr0ousJRPGnodg1w0HbyAHxKeNPt9vZg/exec',
+  {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'text/plain;charset=utf-8'
+    },
+    body: JSON.stringify({
+      gender: gender || '',
+      ageGroup: ageGroup || '',
+      constitution: primary || '',
+      constitutionList: multi || '',
+      version: 'V8.2'
+    })
+  }
+);
 
-async function sendToGoogleSheet(primary,multi){
-try{
-fetch('https://script.google.com/macros/s/AKfycbyMw08r-l3LTvOgRgDRQiCzz5dQDxeSZDfc5wMr0ousJRPGnodg1w0HbyAHxKeNPt9vZg/exec',{method:'POST',body:JSON.stringify({gender:gender,ageGroup:ageGroup,constitution:primary,constitutionList:multi,version:'V8.2'})});
-}catch(e){console.log(e)}
+console.log('Google Sheet 已送出');
+```
+} catch (e) {
+```
+console.log('Google Sheet 送出失敗', e);
+```
+}
+}
 }
 let ageGroup='';
 let gender=null, mode="", current=0, answers=[], stage2Queue=[], stage2Results=[], allStage2Keys=[];
@@ -133,7 +160,7 @@ function showFinal(results,all){
  go('final');
 }
 function toggleDetails(){document.getElementById('finalDetails').classList.toggle('hidden')}
-function restart(){gender=null;mode='';current=0;answers=[];stage2Queue=[];stage2Results=[];document.querySelectorAll('.choice').forEach(c=>c.classList.remove('selected'));document.getElementById('genderNext').disabled=true;go('home')}
+function restart(){  hasSubmittedToSheet = false;  gender = null; mode = ''; current = 0; answers = []; stage2Queue = []; stage2Results = [];  document.querySelectorAll('.choice') .forEach(c=>c.classList.remove('selected'));  document.getElementById('genderNext').disabled = true;  go('home');  }gender=null;mode='';current=0;answers=[];stage2Queue=[];stage2Results=[];document.querySelectorAll('.choice').forEach(c=>c.classList.remove('selected'));document.getElementById('genderNext').disabled=true;go('home')}
 async function loadImage(src){return new Promise((res,rej)=>{const img=new Image();img.crossOrigin='anonymous';img.onload=()=>res(img);img.onerror=rej;img.src=src;})}
 function wrapText(ctx,text,x,y,maxWidth,lineHeight){let line='';const arr=text.split('');for(let i=0;i<arr.length;i++){let test=line+arr[i];if(ctx.measureText(test).width>maxWidth&&line){ctx.fillText(line,x,y);line=arr[i];y+=lineHeight}else line=test}ctx.fillText(line,x,y);return y+lineHeight}
 async function saveResult(){
