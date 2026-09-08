@@ -60,3 +60,8 @@ function doGet(e) {
 - `hypertension`：是／否
 - `hyperlipidemia`：是／否
 - 不蒐集姓名、電話等直接識別個資。
+
+
+## 最終 GitHub 上傳版
+
+`script.js` 已設定新的 V8.3 Google Apps Script Web App `/exec` 網址。原 GitHub 的 `assets/` 資料夾請保留不動。

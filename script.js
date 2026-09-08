@@ -4,7 +4,7 @@ function sendToGoogleSheet(primary, multi) {
   if (hasSubmittedToSheet) return;
   hasSubmittedToSheet = true;
 
-  const baseUrl = "https://script.google.com/macros/s/AKfycbyMw08r-l3LTvOgRgDRQiCzz5dQDxeSZDfc5wMr0ousJRPGnodg1w0HbyAHxKeNPt9vZg/exec";
+  const baseUrl = "https://script.google.com/macros/s/AKfycbxk2o_76HIiwb7G8cBkqtZBimmbY-ShrDCUy7JH_LU8UHUZ-nPiuTF9iXbxdN5qexmiCA/exec";
 
   const params = new URLSearchParams({
     gender: gender || "",
